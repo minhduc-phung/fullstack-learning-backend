@@ -65,10 +65,6 @@ test("Note w/out content is not added", async () => {
   expect(notesAtEnd).toHaveLength(helper.initialNotes.length);
 });
 
-afterAll(async () => {
-  await mongoose.connection.close();
-});
-
 test("A specific note can be viewed", async () => {
   const notesAtStart = await helper.notesInDb();
 
@@ -95,4 +91,8 @@ test("A note can be deleted", async () => {
   const contents = notesAtEnd.map((r) => r.content);
 
   expect(contents).not.toContain(noteToDelete.content);
+});
+
+afterAll(async () => {
+  await mongoose.connection.close();
 });
